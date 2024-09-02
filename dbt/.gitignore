@@ -1,0 +1,19 @@
+*.bak
+.env
+
+# IDEs
+.idea
+.vscode
+
+# DBT
+target/
+logs/
+dbt_packages/
+
+# Python
+venv
+.DS_Store
+reports/presentation_layer/L1/pl_cp_tracking.sql
+
+# pixi environments
+.pixi
