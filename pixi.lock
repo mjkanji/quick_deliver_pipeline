@@ -106,6 +106,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/88/93/f9ddd8fb2b4aa9a9c442c781329b82822c42d5bc19b10c64514ad42eba07/iteration_utilities-0.12.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/31/80/3a54838c3fb461f6fec263ebf3a3a41771bd05190238de3486aae8540c36/jinja2-3.1.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/72/b9/313e8f2f2e9517ae050a692ae7b3e4b3f17cc5e6dfea0db51fe14e586580/jinja2_ansible_filters-1.3.2-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/78/05/8fd074379bdfeb5ce1bccf4a8e23e004e1f238938724f743267759da94e3/jinja2_simple_tags-0.6.1-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/16/0a/3b1ee3721b4bd684b0e29c724ab82ed3b2c0e42285beb8bf9e18de8c903f/jsonpath_ng-1.6.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/69/4a/4f9dbeb84e8850557c02365a0eee0649abe5eb1d84af92a25731c6c0f922/jsonschema-4.23.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ee/07/44bd408781594c4d0a027666ef27fab1e441b109dc3b76b4f836f8fd04fe/jsonschema_specifications-2023.12.1-py3-none-any.whl
@@ -181,6 +182,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/32/46/9cb0e58b2deb7f82b84065f37f3bffeb12413f947f9388e4cac22c4621ce/sortedcontainers-2.4.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/d4/73/febc853519404d2c025e36c471eb320288306bc129842fd23e03be6affff/SQLAlchemy-1.4.53-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/5f/ed/fe1efb09242687adeb17b79160a45413c8e76ce80ebe4acbd25782ad4465/sqlfluff-3.1.1-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/22/32/eed038d918ee6d56683dce6f89457550350de8553239ef329e1b009c68dc/sqlfluff_templater_dbt-3.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ce/98/a446a9bf2625cfdb27cd613510e86b966f5ba7ea67c6c995419677b77bec/sqlglot-25.19.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/d2/fe/e1f55cd82af02d4c955ced59da0585821fcd41f6adcb6a0d6c12809686c8/sqlglotrs-0.2.10-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/5d/a5/b2860373aa8de1e626b2bdfdd6df4355f0565b47e51f7d0c54fe70faf8fe/sqlparse-0.5.1-py3-none-any.whl
@@ -1555,6 +1557,14 @@ packages:
   - pytest ; extra == 'test'
   - pytest-cov ; extra == 'test'
 - kind: pypi
+  name: jinja2-simple-tags
+  version: 0.6.1
+  url: https://files.pythonhosted.org/packages/78/05/8fd074379bdfeb5ce1bccf4a8e23e004e1f238938724f743267759da94e3/jinja2_simple_tags-0.6.1-py2.py3-none-any.whl
+  sha256: 7b7cfa92f6813a1e0f0b61b9efcab60e6793674753e1f784ff270542e80ae20f
+  requires_dist:
+  - jinja2>=2.10
+  requires_python: '>=3.6'
+- kind: pypi
   name: jsonpath-ng
   version: 1.6.1
   url: https://files.pythonhosted.org/packages/16/0a/3b1ee3721b4bd684b0e29c724ab82ed3b2c0e42285beb8bf9e18de8c903f/jsonpath_ng-1.6.1-py3-none-any.whl
@@ -2816,6 +2826,16 @@ packages:
   - tqdm
   - toml ; python_full_version < '3.11'
   - importlib-resources ; python_full_version < '3.9'
+  requires_python: '>=3.8'
+- kind: pypi
+  name: sqlfluff-templater-dbt
+  version: 3.1.1
+  url: https://files.pythonhosted.org/packages/22/32/eed038d918ee6d56683dce6f89457550350de8553239ef329e1b009c68dc/sqlfluff_templater_dbt-3.1.1-py3-none-any.whl
+  sha256: f06ea8c44fd732ab66b225e51db4d0ea828386320c86f51cd0a685b47e2d71f7
+  requires_dist:
+  - sqlfluff==3.1.1
+  - dbt-core>=1.0.0
+  - jinja2-simple-tags>=0.3.1
   requires_python: '>=3.8'
 - kind: pypi
   name: sqlglot
