@@ -11,4 +11,19 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
+    - name: setup-pixi
+      uses: prefix-dev/setup-pixi@v0.8.1
+      with:
+        cache: true
+    - name: Set up and populate DuckDB 
+      working-directory: ./dbt_project
+      run: |
+        pixi run duckdb mydb.ddb < analyses/ddl.sql
+        pixi run duckdb mydb.ddb < analyses/dummy_data.sql
+        pixi run duckdb mydb.ddb 'show all tables'
+        pixi run duckdb mydb.ddb 'select * from raw_couriers'
+
+    - name: Run DBT
+      working-directory: ./dbt_project
+      run: pixi run dbt run
     - uses: pre-commit/action@v3.0.1
