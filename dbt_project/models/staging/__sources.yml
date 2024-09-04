@@ -18,7 +18,7 @@ sources:
           Some records have missing courier_id even though the status is delivered.
       - name: raw_couriers
         description: >
-          Contains information about couriers registered on the platform. 
-          
-          
+          Contains information about couriers registered on the platform.
+
+
           Some couriers have duplicate entries with conflicting status values.
