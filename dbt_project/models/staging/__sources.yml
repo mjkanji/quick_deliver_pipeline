@@ -2,6 +2,7 @@ version: 2
 
 sources:
   - name: prod_db
+    schema: main
     tables:
       - name: raw_customers
         description: >
