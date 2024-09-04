@@ -1,0 +1,58 @@
+files: ^dbt_project/models/
+
+repos:
+  - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+    rev: v1.0.0
+
+    hooks:
+      # dbt docs generate is required by the check-model-has-all-columns hook
+      - id: dbt-docs-generate
+        args: ["--cmd-flags", "++project+dir", ".", "++no+compile"]
+      - id: check-script-semicolon
+      - id: check-script-has-no-table-name
+      - id: check-script-ref-and-source
+        args: ["--manifest", "./target/manifest.json"]
+      - id: check-model-has-properties-file
+        args: ["--manifest", "./target/manifest.json"]
+      
+      # This test should be enabled after DS-241 and DS-212 are complete.
+      # - id: check-model-has-description
+      #   args: ["--manifest", "./target/manifest.json"]
+      
+      # To avoid having to repeat the same docs in two places, we should only add
+      # docs to the staging tables in lieu of the source tables. As such, this test
+      # should be permanently disabled.
+      - id: check-source-table-has-description
+
+      # This does not work with deferral because dbt docs generate does not include models that dont exist in current db
+      - id: check-model-has-all-columns
+        args:
+          [
+            "--manifest",
+            "./target/manifest.json",
+            "--catalog",
+            "./target/catalog.json",
+          ]
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    # this is the version of sqlfluff, needs to be updated when using a new sqlfluff version (pip show sqlfluff)
+    rev: 3.0.5
+    hooks:
+      - id: sqlfluff-lint
+        language: python
+        # Need these two dependencies.
+        #   sqlfluff-templater-dbt should match the version of sqlfluff above in rev (pip show sqlfluff-templater-dbt)
+        #   dbt-snowflake needs to match the version in . tab of Datacoves (pip show dbt-snowflake)
+        additional_dependencies:
+          ["sqlfluff-templater-dbt==3.1.1", "dbt-core==1.8.6", "dbt-duckdb==1.8.3"]
+        # Disable the most commonly violated rules (AM05 and ST06 are excluded by default in the .sqlfluff config and
+        # included here because CLI arguments override the .sqlfluff configs).
+        args: [--config, ./dbt_project/.sqlfluff, --exclude-rules]
+
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.17.0
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint]
+        exclude: ^config/dbt_coves/templates
+
