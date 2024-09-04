@@ -1,0 +1,81 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+    "name": "Quick Deliver Pipeline",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    // "image": "ghcr.io/prefix-dev/pixi",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "containerEnv": {
+        "DBT_PROFILES_DIR": "${containerWorkspaceFolder}/.github/workflows/",
+        "DBT_PROJECT_DIR": "${containerWorkspaceFolder}/dbt_project/"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "innoverio.vscode-dbt-power-user",
+                "ms-python.vscode-pylance",
+                "ms-python.python",
+                "charliermarsh.ruff",
+                "dorzey.vscode-sqlfluff"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.pixi/envs/default/bin/python",
+                
+                /* SQLFluff */
+                "sqlfluff.config": "${containerWorkspaceFolder}/dbt_project/.sqlfluff",
+                "sqlfluff.executablePath": "${containerWorkspaceFolder}/.pixi/envs/default/bin/sqlfluff",
+                
+                /* Linter */
+                "sqlfluff.linter.arguments": [],
+                "sqlfluff.linter.diagnosticSeverity": "error",
+                "sqlfluff.linter.lintEntireProject": false,
+                
+                /* Formatter */
+                "sqlfluff.format.enabled": false, // Use sqlfmt for formatting
+                
+                /* DBT Config required for SQLFluff */
+                "sqlfluff.linter.run": "onSave",
+                
+                /* Disable this for now because we don't want to use SQLFluff
+                for formatting */
+                // "sqlfluff.experimental.format.executeInTerminal": true,
+                
+                /* Power user for DBT */
+                "dbt.enableNewLineagePanel": true,
+                "dbt.sqlFmtPath": "${containerWorkspaceFolder}/.pixi/envs/default/bin/sqlfmt",
+                
+                /* Files associations required by Power User for dbt */
+                "files.associations": {
+                    "dbt_project/models/**/*.yaml": "jinja-yaml",
+                    "dbt_project/models/**/**.yml": "jinja-yaml",
+                    "dbt_project/models/**/**.sql": "jinja-sql",
+                    "dbt_project/**/*.md": "jinja-md"
+                },
+                "[jinja-sql]": {
+                    "editor.defaultFormatter": "innoverio.vscode-dbt-power-user",
+                    "editor.formatOnSave": true
+                }
+            }
+        }
+    },
+    "mounts": [
+        // Mount the DBT profiles.yml to the container
+        {
+            "source": "${localEnv:HOME}/.dbt",
+            "target": "/root/.dbt",
+            "type": "bind"
+        }
+    ],
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    // "features": {},
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "pixi install --no-progress && pixi run dbt deps"
+    // Configure tool-specific properties.
+    // "customizations": {},
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
+}
