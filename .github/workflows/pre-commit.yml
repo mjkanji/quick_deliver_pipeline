@@ -5,6 +5,10 @@ on:
   push:
     branches: [main]
 
+env:
+  DBT_PROFILES_DIR: ${{ github.workspace }}/.github/workflows/
+  DBT_PROJECT_DIR: ${{ github.workspace }}/dbt_project/
+
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
@@ -27,5 +31,21 @@ jobs:
       working-directory: ./dbt_project
       run: |
         pixi run dbt deps
-        pixi run dbt run --profiles-dir ./config/
+        pixi run dbt run
+        pixi run dbt docs generate
+    - name: Print catalog
+      run: |
+        echo "TARGET DIR ----------------"
+        ls dbt_project/target/
+        echo "CATALOG FILE -------------"
+        cat dbt_project/target/catalog.json
+        echo "DONE -----------"
     - uses: pre-commit/action@v3.0.1
+      # with:
+      #   extra_args: dbt-docs-generate --all-files
+    - name: Print things
+      run: |
+        ls .
+        ls dbt_project/
+        ls dbt_project/target/
+        cat dbt_project/target/catalog.json

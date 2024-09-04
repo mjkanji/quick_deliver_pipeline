@@ -1,8 +1,0 @@
-quick_deliver:
-  outputs:
-    dev:
-      type: duckdb
-      path: ./mydb.ddb
-      threads: 4
-
-  target: dev
