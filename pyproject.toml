@@ -3,5 +3,5 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.dagster]
-module_name = "quick_deliver.definitions"
-code_location_name = "quick_deliver"
+module_name = "quick_deliver_pipeline.definitions"
+code_location_name = "quick_deliver_pipeline"

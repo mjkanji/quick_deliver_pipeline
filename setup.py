@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="quick_deliver",
+    name="quick_deliver_pipeline",
     packages=find_packages(exclude=["quick_deliver_tests"]),
     install_requires=[
         "dagster",
