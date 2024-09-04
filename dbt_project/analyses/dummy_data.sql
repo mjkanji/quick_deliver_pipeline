@@ -15,7 +15,7 @@ INSERT INTO raw_couriers (courier_id, signup_date, status, vehicle_type) VALUES
 ('cour_002', '2022-02-25', 'active', 'car'),
 ('cour_003', '2022-04-05', 'inactive', 'scooter'),
 ('cour_004', '2022-06-15', 'active', 'van'),
-('cur_001', '2022-09-20', 'active', 'bike');
+('cour_001', '2022-09-20', 'active', 'bike');
 
 INSERT INTO raw_deliveries (delivery_id, customer_id, courier_id, requested_timestamp, delivery_timestamp, delivery_fee, status) VALUES
 ('deliv_001', 'cust_001', 'cour_001', '2023-01-01 10:00:00', '2023-01-01 10:30:00', 5.99, 'delivered'),

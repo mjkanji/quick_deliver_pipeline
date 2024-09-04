@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS raw_deliveries (
     requested_timestamp TIMESTAMP,
     delivery_timestamp TIMESTAMP,
     delivery_fee DOUBLE PRECISION,
-    status VARCHAR,
-    FOREIGN KEY (customer_id) REFERENCES raw_customers(customer_id),
-    FOREIGN KEY (courier_id) REFERENCES raw_couriers(courier_id)
+    status VARCHAR
+    -- Disable to avoid courier_id becoming a primary key
+    -- FOREIGN KEY (customer_id) REFERENCES raw_customers(customer_id),
+    -- FOREIGN KEY (courier_id) REFERENCES raw_couriers(courier_id)
 );
