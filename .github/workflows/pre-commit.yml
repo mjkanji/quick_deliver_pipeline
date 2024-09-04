@@ -25,5 +25,7 @@ jobs:
 
     - name: Run DBT
       working-directory: ./dbt_project
-      run: pixi run dbt run
+      run: |
+        pixi run dbt deps
+        pixi run dbt run --profiles-dir ./config/
     - uses: pre-commit/action@v3.0.1
