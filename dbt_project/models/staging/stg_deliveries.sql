@@ -1,23 +1,23 @@
-WITH raw_source as (
+with raw_source as (
 
-    select * 
+    select *
     from {{ source('prod_db', 'raw_deliveries') }}
 
 ),
 
-final AS (
+final as (
 
-    SELECT 
-        CAST(delivery_id AS STRING) AS delivery_id,
-        CAST(customer_id AS STRING) AS customer_id,
-        CAST(courier_id AS STRING) AS courier_id,
-        CAST(requested_timestamp AS TIMESTAMP) AS requested_timestamp,
-        CAST(delivery_timestamp AS TIMESTAMP) AS delivery_timestamp,
-        CAST(delivery_fee AS FLOAT) AS delivery_fee,
-        CAST(status AS STRING) AS status
-    
-    FROM raw_source
+    select
+        cast(delivery_id as string) as delivery_id,
+        cast(customer_id as string) as customer_id,
+        cast(courier_id as string) as courier_id,
+        cast(requested_timestamp as timestamp) as requested_timestamp,
+        cast(delivery_timestamp as timestamp) as delivery_timestamp,
+        cast(delivery_fee as float) as delivery_fee,
+        cast(status as string) as status
+
+    from raw_source
 
 )
 
-SELECT * FROM final
+select * from final

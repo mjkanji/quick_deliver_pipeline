@@ -1,20 +1,20 @@
-WITH raw_source as (
+with raw_source as (
 
-    select * 
+    select *
     from {{ source('prod_db', 'raw_couriers') }}
 
 ),
 
-final AS (
+final as (
 
-    SELECT 
-        CAST(courier_id AS STRING) AS courier_id,
-        CAST(signup_date AS DATE) AS signup_date,
-        CAST(status AS STRING) AS status,
-        CAST(vehicle_type AS STRING) AS vehicle_type
-    
-    FROM raw_source
+    select
+        cast(courier_id as string) as courier_id,
+        cast(signup_date as date) as signup_date,
+        cast(status as string) as status,
+        cast(vehicle_type as string) as vehicle_type
+
+    from raw_source
 
 )
 
-SELECT * FROM final
+select * from final
