@@ -1,47 +1,13 @@
 # quick_deliver
 
-This is a [Dagster](https://dagster.io/) project scaffolded with [`dagster project scaffold`](https://docs.dagster.io/getting-started/create-new-project).
+This is a sample analytics pipeline with the following components:
 
-## Getting started
-
-First, install your Dagster code location as a Python package. By using the --editable flag, pip will install your Python package in ["editable mode"](https://pip.pypa.io/en/latest/topics/local-project-installs/#editable-installs) so that as you develop, local code changes will automatically apply.
-
-```bash
-pip install -e ".[dev]"
-```
-
-Then, start the Dagster UI web server:
-
-```bash
-dagster dev
-```
-
-Open http://localhost:3000 with your browser to see the project.
-
-You can start writing assets in `quick_deliver/assets.py`. The assets are automatically loaded into the Dagster code location as you define them.
-
-## Development
-
-### Adding new Python dependencies
-
-You can specify new Python dependencies in `setup.py`.
-
-### Unit testing
-
-Tests are in the `quick_deliver_tests` directory and you can run tests using `pytest`:
-
-```bash
-pytest quick_deliver_tests
-```
-
-### Schedules and sensors
-
-If you want to enable Dagster [Schedules](https://docs.dagster.io/concepts/partitions-schedules-sensors/schedules) or [Sensors](https://docs.dagster.io/concepts/partitions-schedules-sensors/sensors) for your jobs, the [Dagster Daemon](https://docs.dagster.io/deployment/dagster-daemon) process must be running. This is done automatically when you run `dagster dev`.
-
-Once your Dagster Daemon is running, you can start turning on schedules and sensors for your jobs.
-
-## Deploy on Dagster Cloud
-
-The easiest way to deploy your Dagster project is to use Dagster Cloud.
-
-Check out the [Dagster Cloud Documentation](https://docs.dagster.cloud) to learn more.
+- **DBT** for data transformations
+- **Dagster** for data orchestration
+- **DuckDB** as a local data warehouse
+- **SQLFluff** for SQL linting and auto-formatting
+- **pre-commit and GitHub Actions CI/CD pipelines** for running automated tests, linting, etc.
+- `dbt-coves` for DBT utilities and developer productivity
+- **Pixi** for cross-platform, reproducible environments.
+- A fully-featured Docker-based **devcontainer config for reproducible, 1-click set up of your VS Code or GitHub Codespaces IDE**.
+- The **DBT Power User extension** for an improved developer experience when working with DBT Core in VS Code.
