@@ -1,0 +1,10 @@
+quick_deliver:
+  outputs:
+    dev:
+      type: duckdb
+      # The path is relative to where the `dbt run` command is called. So, the command should
+      # only be called from the root of the DBT repo in GitHub Actions.
+      path: "{{ env_var('DBT_PROJECT_DIR') }}/mydb.ddb"
+      threads: 4
+
+  target: dev

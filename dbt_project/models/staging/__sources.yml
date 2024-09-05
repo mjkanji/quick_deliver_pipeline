@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: prod_db
+    schema: main
+    tables:
+      - name: raw_customers
+        description: >
+          Contains information about customers using the platform.
+
+
+          Some signup_date entries are in incorrect formats.
+      - name: raw_deliveries
+        description: >
+          Records every delivery request made through the platform.
+
+
+          Some records have missing courier_id even though the status is delivered.
+      - name: raw_couriers
+        description: >
+          Contains information about couriers registered on the platform.
+
+
+          Some couriers have duplicate entries with conflicting status values.

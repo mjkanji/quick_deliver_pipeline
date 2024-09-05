@@ -1,0 +1,28 @@
+models:
+  - name: couriers_deduped
+    columns:
+      - name: courier_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: signup_date
+        data_type: date
+      - name: status
+        data_type: varchar
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - active
+                - inactive
+      - name: vehicle_type
+        data_type: varchar
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - bike
+                - car
+                - scooter
+                - van

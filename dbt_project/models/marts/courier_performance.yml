@@ -1,0 +1,12 @@
+version: 2
+models:
+  - name: courier_performance
+    columns:
+      - name: courier_id
+        data_type: varchar
+      - name: deliveries_completed
+        data_type: hugeint
+      - name: avg_delivery_fee
+        data_type: double
+      - name: total_earnings
+        data_type: double

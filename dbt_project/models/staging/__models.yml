@@ -1,0 +1,54 @@
+models:
+  - name: stg_couriers
+    columns:
+      - name: courier_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          # - unique
+      - name: signup_date
+        data_type: date
+      - name: status
+        data_type: varchar
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - active
+                - inactive
+      - name: vehicle_type
+        data_type: varchar
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - bike
+                - car
+                - scooter
+                - van
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        data_type: varchar
+      - name: signup_date
+        data_type: date
+      - name: primary_payment_method
+        data_type: varchar
+      - name: lifetime_value
+        data_type: float
+  - name: stg_deliveries
+    columns:
+      - name: delivery_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: courier_id
+        data_type: varchar
+      - name: requested_timestamp
+        data_type: timestamp
+      - name: delivery_timestamp
+        data_type: timestamp
+      - name: delivery_fee
+        data_type: float
+      - name: status
+        data_type: varchar
